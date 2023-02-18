@@ -4,23 +4,41 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { registerUser } from '../utils/auth'; // Update with path to registerUser
 
+const initialState = {
+  name: '',
+  image: '',
+  email: '',
+};
 function RegisterForm({ user, updateUser }) {
-  const [formData, setFormData] = useState({
-    bio: '',
-    uid: user.uid,
-  });
+  const [formData, setFormData] = useState(initialState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser(formData).then(() => updateUser(user.uid));
+    registerUser(formData, user).then(() => updateUser(user.uid));
+  };
+
+  const handleChange = (e) => {
+    // eslint-disable-next-line no-unused-vars
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      name: [value],
+    }));
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Gamer Bio</Form.Label>
-        <Form.Control as="textarea" name="bio" required placeholder="Enter your Bio" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
-        <Form.Text className="text-muted">Let other gamers know a little bit about you...</Form.Text>
+      <Form.Group className="mb-3">
+        <Form.Label>Name</Form.Label>
+        <Form.Control name="name" required onChange={handleChange} />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Profile Image</Form.Label>
+        <Form.Control name="image" required onChange={handleChange} />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Email</Form.Label>
+        <Form.Control name="email" required onChange={handleChange} />
       </Form.Group>
       <Button variant="primary" type="submit">
         Submit
