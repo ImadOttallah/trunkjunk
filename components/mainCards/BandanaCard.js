@@ -30,7 +30,6 @@ function BandanaCard({
         <ul className="list-group">
           <li className="list-group-item">Name: {name}</li>
           <li className="list-group-item">Size: {size}</li>
-          <li className="list-group-item">Image: {image}</li>
           <li className="list-group-item">Description: {description}</li>
           <li className="list-group-item">Origin: {origin}</li>
           <li className="list-group-item">Pattern: {pattern.name}</li>
