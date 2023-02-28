@@ -115,10 +115,10 @@ const BandanaForm = ({ user, obj }) => {
         image: obj.image,
         description: obj.description,
         origin: obj.origin,
-        pattern: obj.pattern.name,
-        marking: obj.marking.name,
-        color: obj.color.name,
-        condition: obj.condition.name,
+        pattern: obj.pattern.id,
+        marking: obj.marking.id,
+        color: obj.color.id,
+        condition: obj.condition.id,
       };
       setCurrentBandana(editBandana);
     }

@@ -4,7 +4,7 @@ import {
   Button, FloatingLabel, Form,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { getCollections, updateCollection } from '../../utils/data/collectionData';
+import { getCollections } from '../../utils/data/collectionData';
 import { createBandanaCollection } from '../../utils/data/bandanaCollectionData';
 
 const initalState = {
@@ -18,11 +18,12 @@ const initalState = {
   },
 };
 
-const BandanaCollectionForm = ({ user, obj }) => {
+const BandanaCollectionForm = ({ obj }) => {
   const [currentCollection, setCurrentCollection] = useState(initalState);
   const [bandanaCollection, setBandanaCollection] = useState([]);
-  const [desiredBandanaCollection, setDesiredBandanaCollection] = useState(initalState);
+  const [, setDesiredBandanaCollection] = useState(initalState);
   const router = useRouter();
+  const { id } = router.query;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,22 +39,13 @@ const BandanaCollectionForm = ({ user, obj }) => {
         [name]: value,
       }));
     }
-    console.warn(bandanaCollection);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const bandanaCollections = {
-      bandana: desiredBandanaCollection,
-      collection: desiredBandanaCollection,
-      user: user.id,
-    };
-    if (obj.id) {
-      updateCollection(bandanaCollections, obj.id).then(() => router.push('/bandanas'));
-    } else {
-      createBandanaCollection(bandanaCollections).then(() => router.push('/collections'));
-      console.warn(bandanaCollections);
-    }
+    createBandanaCollection(id, currentCollection.collection).then(() => router.push('/collections'));
+
+    console.warn(currentCollection);
   };
 
   useEffect(() => {
@@ -103,10 +95,6 @@ const BandanaCollectionForm = ({ user, obj }) => {
 };
 
 BandanaCollectionForm.propTypes = {
-  user: PropTypes.shape({
-    uid: PropTypes.string,
-    id: PropTypes.number,
-  }).isRequired,
   obj: PropTypes.shape({
     id: PropTypes.number,
     bandana: PropTypes.shape({

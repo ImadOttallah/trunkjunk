@@ -1,42 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
-  Button, FloatingLabel, Form,
+  Button, Form,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { createCollection, updateCollection } from '../../utils/data/collectionData';
-import { getBandanas } from '../../utils/data/bandanaData';
 
 const initalState = {
   name: '',
   image: '',
   description: '',
-  bandana: {
-    id: 0,
-    name: '',
-  },
 };
 
 const CollectionForm = ({ user, obj }) => {
   const [currentCollection, setCurrentCollection] = useState(initalState);
-  const [collectionBandana, setCollectionBandana] = useState([]);
-  const [desiredBandanas, setDesiredBandanas] = useState(initalState);
   const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'pattern') {
-      setDesiredBandanas(value);
-      desiredBandanas((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    } else {
-      setCurrentCollection((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+    setCurrentCollection((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
     console.warn(name);
   };
 
@@ -46,7 +32,6 @@ const CollectionForm = ({ user, obj }) => {
       name: currentCollection.name,
       image: currentCollection.image,
       description: currentCollection.description,
-      bandana: desiredBandanas,
       user: user.id,
     };
     if (obj.id) {
@@ -63,11 +48,9 @@ const CollectionForm = ({ user, obj }) => {
         name: obj.name,
         image: obj.image,
         description: obj.description,
-        bandanas: obj.bandanas.name,
       };
       setCurrentCollection(editCollection);
     }
-    getBandanas().then(setCollectionBandana);
   }, [obj]);
   console.warn(obj);
 
@@ -83,30 +66,6 @@ const CollectionForm = ({ user, obj }) => {
           <Form.Label>Description</Form.Label>
           <Form.Control name="description" required value={currentCollection.description} onChange={handleChange} />
         </Form.Group>
-        <FloatingLabel controlId="floatingSelect" label="Bandana" className="mb-3">
-          <Form.Select
-            aria-label="Bandana"
-            name="bandana"
-            onChange={handleChange}
-            className="mb-3"
-            value={currentCollection.bandana}
-            required
-          >
-            <option value="">Select Bandanas</option>
-            {
-            // eslint-disable-next-line react/prop-types
-            collectionBandana?.map((bandana) => (
-              <option
-                key={bandana.id}
-                value={bandana.id}
-                defaultValue={currentCollection.pattern === bandana.id}
-              >
-                {bandana.name}
-              </option>
-            ))
-          }
-          </Form.Select>
-        </FloatingLabel>
         <Button className="create" type="submit">{obj.id ? 'Update' : 'Post'} Collection</Button>
       </Form>
     </>
@@ -123,10 +82,6 @@ CollectionForm.propTypes = {
     image: PropTypes.string,
     description: PropTypes.string,
     id: PropTypes.number,
-    bandana: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
   }),
 }.isRequired;
 
