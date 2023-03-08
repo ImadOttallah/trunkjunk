@@ -14,12 +14,34 @@ const getBandanasById = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// const getBandanaPatterns = () => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/bandanas`)
-//     .then((response) => response.json())
-//     .then(resolve)
-//     .catch(reject);
-// });
+const getBandanaPatterns = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/bandana_patterns`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
+const getBandanaMarkings = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/bandana_markings`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
+const getBandanaColors = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/bandana_colors`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
+const getBandanaConditions = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/bandana_conditions`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
 const createBandana = (bandana) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/bandanas`, {
     method: 'POST',
@@ -53,5 +75,5 @@ const deleteBandana = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 export {
-  getBandanas, getBandanasById, deleteBandana, createBandana, updateBandana,
+  getBandanas, getBandanasById, deleteBandana, createBandana, updateBandana, getBandanaPatterns, getBandanaMarkings, getBandanaColors, getBandanaConditions,
 };
