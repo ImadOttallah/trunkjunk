@@ -25,23 +25,25 @@ function Home() {
       >
         Post a Bandana
       </Button>
-      {bandanas.map((bandana) => (
-        <section key={`bandana--${bandana.id}`} className="bandanas">
-          <BandanaCard
-            id={bandana.id}
-            name={bandana.name}
-            size={bandana.size}
-            image={bandana.image}
-            description={bandana.description}
-            origin={bandana.origin}
-            pattern={bandana.pattern}
-            marking={bandana.marking}
-            color={bandana.color}
-            condition={bandana.condition}
-            onUpdate={getContent}
-          />
-        </section>
-      ))}
+      <div className="d-flex flex-wrap">
+        {bandanas.map((bandana) => (
+          <section key={`bandana--${bandana.id}`} className="bandanas">
+            <BandanaCard
+              id={bandana.id}
+              name={bandana.name}
+              size={bandana.size}
+              image={bandana.image}
+              description={bandana.description}
+              origin={bandana.origin}
+              pattern={bandana.pattern}
+              marking={bandana.marking}
+              color={bandana.color}
+              condition={bandana.condition}
+              onUpdate={getContent}
+            />
+          </section>
+        ))}
+      </div>
     </article>
   );
 }

@@ -25,18 +25,20 @@ function Home() {
       >
         Create a Collection
       </Button>
-      {collections.map((collection) => (
-        <section key={`collection--${collection.id}`} className="collections">
-          <CollectionCard
-            id={collection.id}
-            name={collection.name}
-            image={collection.image}
-            description={collection.description}
-            bandanas={collection.bandanas}
-            onUpdate={getContent}
-          />
-        </section>
-      ))}
+      <div className="d-flex flex-wrap">
+        {collections.map((collection) => (
+          <section key={`collection--${collection.id}`} className="collections">
+            <CollectionCard
+              id={collection.id}
+              name={collection.name}
+              image={collection.image}
+              description={collection.description}
+              bandanas={collection.bandanas}
+              onUpdate={getContent}
+            />
+          </section>
+        ))}
+      </div>
     </article>
   );
 }

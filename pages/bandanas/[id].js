@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { getBandanasById } from '../../utils/data/bandanaData';
 
 export default function ViewBandanaDetail() {
@@ -19,7 +19,8 @@ export default function ViewBandanaDetail() {
   return (
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">
-        <img src={bandanaDetail.image} alt={bandanaDetail.name} />
+        <Card.Img variant="top" src={bandanaDetail.image} alt={bandanaDetail.name} style={{ height: '500px' }} />
+        {/* <img src={bandanaDetail.image} alt={bandanaDetail.name} /> */}
       </div>
       <div className="text-black ms-5 details">
         <h5>

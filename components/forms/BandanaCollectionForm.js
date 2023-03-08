@@ -21,6 +21,7 @@ const initalState = {
 const BandanaCollectionForm = ({ obj }) => {
   const [currentCollection, setCurrentCollection] = useState(initalState);
   const [bandanaCollection, setBandanaCollection] = useState([]);
+  // const [selectedItems, setSelectedItems] = useState([]);
   const [, setDesiredBandanaCollection] = useState(initalState);
   const router = useRouter();
   const { id } = router.query;
@@ -44,9 +45,13 @@ const BandanaCollectionForm = ({ obj }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     createBandanaCollection(id, currentCollection.collection).then(() => router.push('/collections'));
-
-    console.warn(currentCollection);
   };
+  // const handleSelectItem = (e) => {
+  //   setSelectedItems([...selectedItems, e.target.value]);
+  // };
+  // eslint-disable-next-line no-self-compare
+  const filteredCollection = bandanaCollection.filter((collection) => collection.bandanas.id !== bandanaCollection.includes(collection.bandanas?.id === 1));
+  console.warn(bandanaCollection);
 
   useEffect(() => {
     if (obj.id) {
@@ -58,7 +63,6 @@ const BandanaCollectionForm = ({ obj }) => {
     }
     getCollections().then(setBandanaCollection);
   }, [obj]);
-  console.warn(obj);
 
   return (
     <>
@@ -74,9 +78,16 @@ const BandanaCollectionForm = ({ obj }) => {
             required
           >
             <option value="">Select Collection</option>
+
+            {/* <select onChange={handleSelectItem}>
+              {bandanaCollection
+                .filter((item) => !selectedItems.find((taco) => item === taco))
+                .map((collection) => <option value={collection.id}>{collection.name}</option>)}
+            </select> */}
+
             {
             // eslint-disable-next-line react/prop-types
-            bandanaCollection?.map((collection) => (
+            filteredCollection?.map((collection) => (
               <option
                 key={collection.id}
                 value={collection.id}
