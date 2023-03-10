@@ -50,8 +50,10 @@ const BandanaCollectionForm = ({ obj }) => {
   //   setSelectedItems([...selectedItems, e.target.value]);
   // };
   // eslint-disable-next-line no-self-compare
-  const filteredCollection = bandanaCollection.filter((collection) => collection.bandanas.id !== bandanaCollection.includes(collection.bandanas?.id === 1));
-  console.warn(bandanaCollection);
+  const filteredCollection = () => { bandanaCollection.filter((collection) => collection.bandanas.id !== id); };
+  // const filteredCollection = bandanaCollection.map((collection) => console.warn(collection));
+  // console.warn(bandanaCollection);
+  // console.warn(currentCollection);
 
   useEffect(() => {
     if (obj.id) {
@@ -62,6 +64,7 @@ const BandanaCollectionForm = ({ obj }) => {
       setCurrentCollection(editCollection);
     }
     getCollections().then(setBandanaCollection);
+    filteredCollection();
   }, [obj]);
 
   return (
@@ -87,7 +90,7 @@ const BandanaCollectionForm = ({ obj }) => {
 
             {
             // eslint-disable-next-line react/prop-types
-            filteredCollection?.map((collection) => (
+            bandanaCollection?.map((collection) => (
               <option
                 key={collection.id}
                 value={collection.id}
