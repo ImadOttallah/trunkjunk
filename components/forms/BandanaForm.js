@@ -40,10 +40,10 @@ const initalState = {
 
 const BandanaForm = ({ user, obj }) => {
   const [bandanaPattern, setBandanaPattern] = useState([]);
-  const [desiredPattern, setDesiredPattern] = useState([]);
-  const [desiredMarking, setDesiredMarking] = useState([]);
-  const [desiredColor, setDesiredColor] = useState([]);
-  const [desiredCondition, setDesiredCondition] = useState([]);
+  const [, setDesiredPattern] = useState([]);
+  const [, setDesiredMarking] = useState([]);
+  const [, setDesiredColor] = useState([]);
+  const [, setDesiredCondition] = useState([]);
   const [bandanaMarking, setBandanaMarking] = useState([]);
   const [bandanaColor, setBandanaColor] = useState([]);
   const [bandanaCondition, setBandanaCondition] = useState([]);
@@ -82,8 +82,8 @@ const BandanaForm = ({ user, obj }) => {
         [name]: value,
       }));
     }
-    console.warn(name);
   };
+  console.warn(obj.id);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,10 +93,10 @@ const BandanaForm = ({ user, obj }) => {
       image: currentBandana.image,
       description: currentBandana.description,
       origin: currentBandana.origin,
-      pattern: desiredPattern,
-      marking: desiredMarking,
-      color: desiredColor,
-      condition: desiredCondition,
+      pattern: obj.pattern.id,
+      marking: obj.marking.id,
+      color: obj.color.id,
+      condition: obj.condition.id,
       user: user.id,
     };
     if (obj.id) {
@@ -262,22 +262,10 @@ BandanaForm.propTypes = {
     description: PropTypes.string,
     origin: PropTypes.string,
     id: PropTypes.number,
-    pattern: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
-    marking: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
-    color: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
-    condition: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
+    pattern: PropTypes.number,
+    marking: PropTypes.number,
+    color: PropTypes.number,
+    condition: PropTypes.number,
   }),
 }.isRequired;
 
